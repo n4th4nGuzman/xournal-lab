@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'" />
+  <title>Xournal Lab</title>
+  <link rel="stylesheet" href="katex/katex.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header id="titlebar"><span id="tbLogo">✎</span><nav id="menubar" aria-label="Menú"></nav><span id="tbTitle"></span></header>
+  <header id="bar" class="tb">
+    <button id="open" data-icon="open" title="Abrir (Ctrl+O)"></button>
+    <button id="save" data-icon="save" title="Guardar (Ctrl+S): la primera vez pregunta dónde"></button>
+    <span class="sep"></span>
+    <button id="undo" data-icon="undo" title="Deshacer (Ctrl+Z)"></button>
+    <button id="redo" data-icon="redo" title="Rehacer (Ctrl+Y)"></button>
+    <span class="sep"></span>
+    <button id="cut" data-icon="cut" title="Cortar (Ctrl+X)"></button>
+    <button id="copy" data-icon="copy" title="Copiar la selección (Ctrl+C)"></button>
+    <button id="paste" data-icon="paste" title="Pegar (Ctrl+V)"></button>
+    <button id="dup" data-icon="dup" title="Duplicar (Ctrl+D)"></button>
+    <span class="sep"></span>
+    <button id="btnSidePages" data-icon="thumbs" title="Barra lateral de miniaturas de páginas"></button>
+    <button id="btnSideLayers" data-icon="layers" title="Barra lateral de capas"></button>
+    <span class="sep"></span>
+    <button id="pgFirst" data-icon="first" title="Primera página (Ctrl+Inicio)"></button>
+    <button id="pgPrev" data-icon="prev" title="Página anterior (Re Pág)"></button>
+    <input id="pgNum" type="number" min="1" title="Ir a la página" />
+    <span class="of">de <b id="pgTotal">0</b></span>
+    <button id="pgNext" data-icon="next" title="Página siguiente (Av Pág)"></button>
+    <button id="pgLast" data-icon="last" title="Última página (Ctrl+Fin)"></button>
+    <button id="histBack" data-icon="histBack" title="Volver a la página anterior del historial (Alt+←)"></button>
+    <button id="histFwd" data-icon="histFwd" title="Avanzar en el historial (Alt+→)"></button>
+    <span class="sep"></span>
+    <button id="pgNew" data-icon="pageAdd" title="Nueva página después de la actual"></button>
+    <button id="pgBefore" data-icon="pageBefore" title="Insertar una página antes de la actual"></button>
+    <button id="pgAppend" data-icon="pageEnd" title="Añadir una página al final"></button>
+    <button id="pgDelete" data-icon="pageDel" title="Eliminar la página actual"></button>
+    <button id="pgUp" data-icon="up" title="Mover la página hacia arriba"></button>
+    <button id="pgDown" data-icon="down" title="Mover la página hacia abajo"></button>
+    <span class="sep"></span>
+    <button id="zoomOut" data-icon="zoomOut" title="Alejar (Ctrl+-)"></button>
+    <span id="zoomLabel">100%</span>
+    <button id="zoomIn" data-icon="zoomIn" title="Acercar (Ctrl++)"></button>
+    <button id="fit" data-icon="fit" title="Ajustar al ancho"></button>
+    <button id="btnTheme" data-icon="theme" title="Cambiar de tema: clásico / neon"></button>
+    <button id="btnPaper" data-icon="paper" title="Papel: fondo, color y formato de la hoja"></button>
+    <span id="info"></span>
+  </header>
+  <header id="bar2" class="tb">
+    <span class="split"><button class="tool active" data-tool="pen" data-icon="pen" title="Lápiz (P)"></button><button class="splitOpt" id="btnTablet" data-icon="caret" title="Lápiz y tableta: punta (bolígrafo, tinta, pluma, pincel), grosor, curva de presión, botones del lápiz y atajos de teclado"></button></span>
+    <button class="tool" data-tool="highlighter" data-icon="highlighter" title="Resaltador (H)"></button>
+    <button class="tool" data-tool="eraser" data-icon="eraser" title="Goma: borra trazos enteros (E)"></button>
+    <button class="tool" data-tool="eraserPart" data-icon="eraserPart" title="Borrar parte: corta los trazos (B)"></button>
+    <span class="sep"></span>
+    <button class="tool" data-tool="select" data-icon="select" title="Seleccionar con rectángulo (S). Arrastra para mover, usa las asas para redimensionar. Mayús+arrastrar empieza una selección nueva. Supr borra, Esc deselecciona"></button>
+    <button class="tool" data-tool="lasso" data-icon="lasso" title="Lazo: dibuja una región libre alrededor de lo que quieres seleccionar (L)"></button>
+    <button class="tool" data-tool="vspace" data-icon="vspace" title="Espacio vertical (V): arrastra desde una línea para abrir o cerrar espacio por debajo"></button>
+    <button class="tool" data-tool="hand" data-icon="hand" title="Mano: desplazar con el dedo (M)"></button>
+    <span class="sep"></span>
+    <button class="tool" data-tool="shape" data-icon="shape" title="Formas (G): arrastra. Mayús = cuadrado, círculo o ángulos de 15°"></button>
+    <select id="shapeSel" title="Tipo de forma">
+      <option value="rect">Rectángulo</option>
+      <option value="ellipse">Elipse</option>
+      <option value="line">Línea</option>
+      <option value="arrow">Flecha</option>
+    </select>
+    <button id="recog" data-icon="recog" title="Formas automáticas: el lápiz convierte líneas, elipses, rectángulos y triángulos dibujados a mano en la figura limpia"></button>
+    <button class="tool" data-tool="text" data-icon="text" title="Texto (T): clic en la página; clic en un texto para editarlo"></button>
+    <button id="btnMd" data-icon="markdown" title="Markdown en los textos: con él activado, # Título, **negrita**, *cursiva*, `código`, listas con - y 1., citas con &gt; y líneas con --- se dibujan con formato; el texto sigue siendo editable en markdown"></button>
+    <button class="tool" data-tool="latex" data-icon="latex" title="LaTeX (X): clic para escribir una fórmula; clic sobre una fórmula para editarla"></button>
+    <button id="image" data-icon="image" title="Insertar imagen (también Ctrl+V o arrastrar)"></button>
+    <input type="file" id="imgInput" accept="image/*" hidden />
+    <button class="tool" data-tool="laser" data-icon="laser" title="Puntero láser (K): señala con un rastro rojo que se desvanece; no dibuja"></button>
+    <span class="split"><button class="tool" data-tool="fill" data-icon="fill" title="Relleno (U): clic para rellenar una zona; arrastra una línea o curva para rellenar a partir de ella, hacia el lado elegido. Se detiene en los trazos de la capa activa"></button><button class="splitOpt" id="btnFill" data-icon="caret" title="Opciones del relleno: lado, degradado, opacidad, huecos"></button></span>
+    <span class="split"><button class="tool" data-tool="plane" data-icon="plane" title="Plano cartesiano (C): arrastra un recuadro para dibujar ejes (y cuadrícula) con tu lápiz. Se puede redimensionar con las asas y cambiar de escala en sus opciones"></button><button class="splitOpt" id="btnPlane" data-icon="caret" title="Opciones del plano cartesiano: rango, escala, cuadrícula, números, flechas"></button></span>
+    <span class="split"><button class="tool" data-tool="space3" data-icon="space3" title="Espacio cartesiano 3D (D): arrastra para dibujar los tres ejes. Con el espacio seleccionado, los círculos del final de cada eje se arrastran para cambiar su ángulo (Mayús: conserva el largo)"></button><button class="splitOpt" id="btnSpace3" data-icon="caret" title="Opciones del espacio 3D: rangos, escala, cuadrículas, ángulo de cada eje"></button></span>
+    <span class="split"><button class="tool" data-tool="numline" data-icon="numline" title="Recta real (N): arrastra para dibujar una recta numérica; escribe conjuntos como (−2, 3] ∪ {5} y se marcan con círculos abiertos o cerrados. Con ella seleccionada, los círculos de sus extremos se arrastran"></button><button class="splitOpt" id="btnNumline" data-icon="caret" title="Opciones de la recta real: conjuntos a marcar, rango, paso, extremos"></button></span>
+    <span class="split"><button class="tool" data-tool="venn" data-icon="venn" title="Diagrama de conjuntos (J): arrastra un recuadro (el universo) con 2 o 3 círculos; escribe qué región sombrear (A ∩ B′, A ∖ B…) y los elementos de cada conjunto"></button><button class="splitOpt" id="btnVenn" data-icon="caret" title="Opciones del diagrama: región a sombrear, nombres, elementos"></button></span>
+    <span class="split"><button class="tool" data-tool="figure" data-icon="figure" title="Figuras (F): segmentos, flechas, curvas, polígonos, ángulos, cotas y sólidos de alambre (cubo, pirámide, cilindro, cono, esfera). Arrastra para dibujar; en polígonos y curvas por puntos, un clic por vértice (doble clic o Intro termina, Retroceso quita el último, Esc cancela). Con la figura seleccionada, los círculos se arrastran para editarla"></button><button class="splitOpt" id="btnFigure" data-icon="caret" title="Galería y opciones de las figuras"></button></span>
+    <span class="sep"></span>
+    <button id="btnGlow" data-icon="glow" title="Brillo (glow) de los trazos: interruptor, tamaño e intensidad"></button>
+    <button id="btnPalette" data-icon="palette" title="Paletas de colores: conjuntos que combinan bien"></button>
+    <span id="swatches"></span>
+    <input type="color" id="customColor" value="#9933cc" title="Color personalizado" />
+    <span id="sizePresets" role="group" aria-label="Tamaños guardados"></span>
+    <select id="width" title="Grosor, tamaño de letra o tamaño de la goma"></select>
+    <span class="sep"></span>
+    <button id="front" data-icon="front" title="Traer al frente (Ctrl+↑)"></button>
+    <button id="back" data-icon="back" title="Enviar al fondo (Ctrl+↓)"></button>
+    <button id="rotL" data-icon="rotL" title="Rotar la selección 90° a la izquierda (Mayús+R)"></button>
+    <button id="rotR" data-icon="rotR" title="Rotar la selección 90° a la derecha (R)"></button>
+    <button id="flipH" data-icon="flipH" title="Espejar horizontalmente (F). También arrastrando un asa al otro lado"></button>
+    <button id="flipV" data-icon="flipV" title="Espejar verticalmente (Mayús+F)"></button>
+  </header>
+  <header id="bar3" class="tb" hidden>
+    <span>Fondo</span><select id="paperSel" title="Tipo de papel"></select>
+    <span id="paperOpts"></span>
+    <input type="color" id="bgColor" value="#ffffff" title="Color del papel" />
+    <span id="paperSwatches" title="Colores de la paleta activa para el papel"></span>
+    <label title="Aplicar el fondo y el formato a todas las páginas"><input type="checkbox" id="applyAll" /> todas las páginas</label>
+    <span class="sep"></span>
+    <span>Papel</span><select id="formatSel" title="Formato de papel"></select>
+    <button id="orient" data-icon="orient" title="Girar la hoja (vertical / horizontal)"></button>
+    <input id="fmtW" type="number" min="20" step="1" title="Ancho en mm" /> ×
+    <input id="fmtH" type="number" min="20" step="1" title="Alto en mm" /> mm
+    <button id="fmtApply" data-icon="check" title="Aplicar el tamaño personalizado"></button>
+  </header>
+  <div id="findBar" hidden>
+    <span>Buscar</span>
+    <input id="findQ" type="text" placeholder="Texto o fórmula…" spellcheck="false" />
+    <button id="findPrev" title="Anterior (Mayús+Intro)">◀</button>
+    <button id="findNext" title="Siguiente (Intro)">▶</button>
+    <span id="findCount"></span>
+    <label><input id="findCase" type="checkbox" /> distinguir mayúsculas</label>
+    <button id="findClose" title="Cerrar (Esc)">×</button>
+  </div>
+  <div id="palMenu" hidden role="menu"></div>
+  <div id="glowPanel" hidden>
+    <label class="glowRow"><input type="checkbox" id="glowOn" /> <b>Brillo en los trazos nuevos</b></label>
+    <label class="glowRow">Tamaño <input type="range" id="glowSize" min="1" max="40" step="1" /> <output id="glowSizeV"></output></label>
+    <label class="glowRow">Intensidad <input type="range" id="glowInt" min="5" max="100" step="5" /> <output id="glowIntV"></output></label>
+    <div id="glowDemo"><svg viewBox="0 0 200 40" width="200" height="40"><path id="glowDemoPath" d="M8 28 C 40 4, 70 4, 100 22 S 160 36, 192 12" fill="none" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+    <div class="glowBtns"><button id="glowApply" type="button" title="Poner este brillo a los trazos seleccionados">Aplicar a la selección</button><button id="glowRemove" type="button" title="Quitar el brillo de los trazos seleccionados">Quitar de la selección</button></div>
+    <p class="note">Solo lápiz y formas. Se guarda en el archivo (atributos glow y glowAlpha); Xournal++ oficial los ignora y muestra el trazo sin brillo.</p>
+  </div>
+  <div id="planePanel" hidden>
+    <div class="glowRow"><b>Plano cartesiano</b></div>
+    <p class="note" id="planeMode"></p>
+    <div class="planeGrid">
+      <label>x mín <input type="number" id="plXmin" step="any" /></label>
+      <label>x máx <input type="number" id="plXmax" step="any" /></label>
+      <label>y mín <input type="number" id="plYmin" step="any" /></label>
+      <label>y máx <input type="number" id="plYmax" step="any" /></label>
+      <label title="Distancia entre marcas, números y líneas de la cuadrícula en el eje x">escala x <input type="number" id="plXstep" step="any" min="0.000001" /></label>
+      <label title="Distancia entre marcas, números y líneas de la cuadrícula en el eje y">escala y <input type="number" id="plYstep" step="any" min="0.000001" /></label>
+    </div>
+    <label class="glowRow"><input type="checkbox" id="plGrid" /> Cuadrícula (desmárcala para dejar solo los ejes)</label>
+    <label class="glowRow">Subcuadrícula <select id="plSub"><option value="0">no</option><option value="2">2 por casilla</option><option value="4">4 por casilla</option><option value="5">5 por casilla</option><option value="10">10 por casilla</option></select></label>
+    <label class="glowRow"><input type="checkbox" id="plTicks" /> Marcas en los ejes</label>
+    <label class="glowRow"><input type="checkbox" id="plNumbers" /> Números</label>
+    <label class="glowRow"><input type="checkbox" id="plArrows" /> Flechas en los extremos</label>
+    <label class="glowRow"><input type="checkbox" id="plSquare" /> Casillas cuadradas (misma escala en x e y)</label>
+    <div class="glowRow">Nombres de los ejes <input type="text" id="plXl" maxlength="12" size="5" /> <input type="text" id="plYl" maxlength="12" size="5" /></div>
+    <div class="glowBtns"><button id="plAxesOnly" type="button" title="Quitar la cuadrícula y dejar solo los ejes">Solo ejes</button><button id="plRestyle" type="button" title="Dibujar el plano seleccionado con el color, el grosor y el brillo del lápiz de ahora">Estilo del lápiz</button></div>
+    <p class="note">Con un plano seleccionado, los cambios se aplican a él; si no, valen para el próximo. El color, el grosor y el brillo salen del lápiz. Arrastra las asas para redimensionarlo: la escala numérica se conserva.</p>
+  </div>
+  <div id="linePanel" class="mathPanel" hidden></div>
+  <div id="vennPanel" class="mathPanel" hidden></div>
+  <div id="figPanel" hidden>
+    <div class="glowRow"><b>Figuras</b></div>
+    <div id="figGallery"></div>
+    <div class="glowRow"><label>Puntas de flecha <select id="figHeads"><option value="none">ninguna</option><option value="end">al final</option><option value="both">en ambos extremos</option></select></label>
+      <label>Trazo <select id="figDash"><option value="solid">continuo</option><option value="dash">rayas</option><option value="dot">puntos</option></select></label></div>
+    <div class="glowRow" id="figRowN"><label>Lados / meridianos <input type="number" id="figN" min="3" max="12" step="1" /></label> <label>Paralelos <input type="number" id="figM" min="0" max="9" step="1" /></label></div>
+    <div class="glowRow" id="figRowH"><label>Aristas ocultas <select id="figHidden"><option value="dash">a rayas</option><option value="none">no mostrar</option><option value="solid">como las demás</option></select></label></div>
+    <div class="glowRow"><label>Rótulo <input type="text" id="figLabel" maxlength="40" size="14" /></label></div>
+    <div class="glowBtns"><button id="figRestyle" type="button" title="Dar a la figura seleccionada el color, grosor y brillo del lápiz">Estilo del lápiz</button></div>
+    <p class="note">Con una figura seleccionada, los cambios se aplican a ella; si no, valen para la próxima. Sus círculos se arrastran para editarla (Mayús: ángulos de 15°; en un sólido, conserva el largo de la arista). El color, el grosor y el brillo salen del lápiz.</p>
+  </div>
+  <div id="space3Panel" hidden>
+    <div class="glowRow"><b>Espacio cartesiano 3D</b></div>
+    <p class="note" id="s3Mode"></p>
+    <div class="s3Table">
+      <span></span><span>mín</span><span>máx</span><span>escala</span><span title="Ángulo de la mitad positiva del eje">ángulo +°</span><span title="Largo en la hoja de una unidad de la mitad positiva">largo +</span><span title="Ángulo de la mitad negativa del eje">ángulo −°</span><span title="Largo en la hoja de una unidad de la mitad negativa">largo −</span><span>nombre</span>
+      <b>x</b><input type="number" id="s3Xmin" step="any" /><input type="number" id="s3Xmax" step="any" /><input type="number" id="s3Xstep" step="any" min="0.000001" /><input type="number" id="s3Xang" step="any" /><input type="number" id="s3Xlen" step="any" min="2" /><input type="number" id="s3XangN" step="any" /><input type="number" id="s3XlenN" step="any" min="2" /><input type="text" id="s3Xn" maxlength="12" />
+      <b>y</b><input type="number" id="s3Ymin" step="any" /><input type="number" id="s3Ymax" step="any" /><input type="number" id="s3Ystep" step="any" min="0.000001" /><input type="number" id="s3Yang" step="any" /><input type="number" id="s3Ylen" step="any" min="2" /><input type="number" id="s3YangN" step="any" /><input type="number" id="s3YlenN" step="any" min="2" /><input type="text" id="s3Yn" maxlength="12" />
+      <b>z</b><input type="number" id="s3Zmin" step="any" /><input type="number" id="s3Zmax" step="any" /><input type="number" id="s3Zstep" step="any" min="0.000001" /><input type="number" id="s3Zang" step="any" /><input type="number" id="s3Zlen" step="any" min="2" /><input type="number" id="s3ZangN" step="any" /><input type="number" id="s3ZlenN" step="any" min="2" /><input type="text" id="s3Zn" maxlength="12" />
+    </div>
+    <div class="glowRow">Cuadrícula en el plano
+      <label><input type="checkbox" id="s3GridXY" /> xy</label>
+      <label><input type="checkbox" id="s3GridXZ" /> xz</label>
+      <label><input type="checkbox" id="s3GridYZ" /> yz</label>
+    </div>
+    <label class="glowRow"><input type="checkbox" id="s3Ticks" /> Marcas en los ejes</label>
+    <label class="glowRow"><input type="checkbox" id="s3Numbers" /> Números</label>
+    <label class="glowRow"><input type="checkbox" id="s3Arrows" /> Flechas en los extremos</label>
+    <div class="glowBtns"><button id="s3Reset" type="button" title="Volver a los ángulos y largos habituales (z arriba, y a la derecha, x hacia ti)">Vista por defecto</button><button id="s3Restyle" type="button" title="Dibujar el espacio seleccionado con el color, el grosor y el brillo del lápiz de ahora">Estilo del lápiz</button></div>
+    <p class="note">Con un espacio seleccionado aparecen círculos al final de cada mitad de cada eje (la positiva y la negativa): arrástralos para estirar y girar solo esa mitad (Mayús conserva su largo). El ángulo se mide desde la derecha, en sentido antihorario.</p>
+  </div>
+  <div id="fillPanel" hidden>
+    <div class="glowRow"><b>Relleno a partir de una línea</b></div>
+    <div class="glowRow">Lado
+      <label><input type="radio" name="fillSide" value="left" /> izquierda</label>
+      <label><input type="radio" name="fillSide" value="right" /> derecha</label>
+    </div>
+    <div class="glowRow">Tipo
+      <select id="fillKind"><option value="solid">Color sólido</option><option value="linear">Degradado lineal</option><option value="radial">Degradado radial</option><option value="riemann">Rectángulos (suma de Riemann)</option></select>
+    </div>
+    <div class="glowRow" id="fillRowRule" title="Por encima: cada rectángulo llega hasta lo más alto de la curva en su columna (la cubre). Por debajo: hasta lo más bajo (queda debajo de ella). Los demás usan la altura de la curva en el punto indicado de la columna">Rectángulos
+      <select id="fillRule"><option value="upper">por encima (suma superior)</option><option value="lower">por debajo (suma inferior)</option><option value="mid">punto medio</option><option value="left">extremo izquierdo</option><option value="right">extremo derecho</option></select>
+    </div>
+    <div class="glowRow" id="fillRowBase" title="Recta: arrastras y la base es una línea perfectamente recta de principio a fin (Mayús: ángulos de 15°; casi horizontal o vertical se endereza sola con el imán). Curva: los rectángulos siguen la curva que dibujas, cada uno apoyado sobre su tramo y mirando al lado elegido">Base
+      <select id="fillBase"><option value="line">línea perfectamente recta</option><option value="curve">sigue la curva que dibujo</option></select>
+    </div>
+    <div class="glowRow" id="fillRowBy">Definir por
+      <select id="fillBy"><option value="count">cantidad</option><option value="width">ancho</option></select>
+      <input type="range" id="fillCount" min="1" max="200" step="1" /><input type="range" id="fillWidth" min="2" max="100" step="1" /> <output id="fillByV"></output>
+    </div>
+    <label class="glowRow" id="fillRowOutline"><input type="checkbox" id="fillOutline" /> Contorno de cada rectángulo (trazos del lápiz)</label>
+    <div class="glowRow" id="fillRowC2">Segundo color <input type="color" id="fillColor2" /></div>
+    <div class="glowRow" id="fillRowAngle">Ángulo <input type="range" id="fillAngle" min="0" max="345" step="15" /> <output id="fillAngleV"></output></div>
+    <div class="glowRow">Opacidad <input type="range" id="fillOpacity" min="5" max="100" step="5" /> <output id="fillOpacityV"></output></div>
+    <div class="glowRow" title="Ancho máximo de una abertura que el relleno no puede cruzar. MÁS ALTO = cierra aberturas más grandes (el relleno se escapa menos), pero también tapa pasillos estrechos">Cerrar huecos hasta <input type="range" id="fillGap" min="0" max="16" step="0.5" /> <output id="fillGapV"></output></div>
+    <label class="glowRow" title="Si el relleno se escapa por una abertura, la va cerrando sola hasta el límite de abajo; si el clic cae un píxel fuera de una forma cerrada, rellena la forma; y los extremos de la línea arrastrada se pegan a la curva cercana. Mayús al soltar lo desactiva"><input type="checkbox" id="fillMagnet" /> <b>Imán</b>: cerrar aberturas y pegarse al borde solo</label>
+    <div class="glowRow" id="fillRowMax">Imán hasta <input type="range" id="fillMax" min="2" max="40" step="1" /> <output id="fillMaxV"></output></div>
+    <label class="glowRow"><input type="checkbox" id="fillKeep" /> Dejar la línea dibujada como trazo</label>
+    <p class="note">Clic: relleno clásico (si la forma tiene una abertura, sale por ella). Arrastrar: la flecha verde marca el sentido y los trazos cortos verdes indican el lado que se rellena. El relleno es una imagen bajo los trazos de la capa: se puede mover, borrar o deshacer. Usa el color del lápiz como primer color. Mantén Mayús al soltar para rellenar sin imán.</p>
+  </div>
+  <div id="work">
+  <aside id="side" hidden>
+    <div class="tabs">
+      <button id="tabPages" class="on" type="button">Páginas</button>
+      <button id="tabLayers" type="button">Capas</button>
+      <button id="sideClose" type="button" title="Cerrar la barra lateral">×</button>
+    </div>
+    <div id="panePages"><div id="panePagesTools" class="paneTools"></div><div id="thumbs"></div></div>
+    <div id="paneLayers" hidden>
+      <div id="paneLayersTools" class="paneTools"></div>
+      <ul id="lyList"></ul>
+      <p class="note">Mostrar u ocultar una capa solo afecta a la pantalla: el archivo guarda todas.</p>
+    </div>
+  </aside>
+  <div id="stage">
+    <main id="scroller"><div id="pages"></div><div id="hint">Abre un archivo .xopp o arrástralo aquí</div></main>
+    <canvas id="live"></canvas>
+    <div id="welcome" hidden></div>
+  </div>
+  </div>
+  <div id="latexDlg" class="modal" hidden>
+    <div class="dlg" role="dialog" aria-label="Fórmula LaTeX">
+      <div class="dlgHead"><b>Fórmula LaTeX</b><span>Ctrl+Enter inserta · Esc cancela</span></div>
+      <div class="dlgBody">
+        <textarea id="ltx" spellcheck="false" rows="6" placeholder="Escribe LaTeX, por ejemplo: \frac{a}{b}"></textarea>
+        <div id="ltxPrev" class="prev"></div>
+      </div>
+      <div id="ltxErr" class="err"></div>
+      <div id="ltxPal" class="pal"></div>
+      <div class="dlgOpts">
+        <label><input type="radio" name="ltxMode" value="display" checked /> Centrada</label>
+        <label><input type="radio" name="ltxMode" value="inline" /> En línea</label>
+        <label>Tamaño <select id="ltxSize"><option>10</option><option>12</option><option selected>14</option><option>18</option><option>24</option><option>32</option></select> pt</label>
+        <label title="Guarda un PNG normal: se ve igual en cualquier programa, pero no se podrá editar después"><input type="checkbox" id="ltxImage" /> Guardar como imagen simple</label>
+        <span class="grow"></span>
+        <button id="ltxCancel" type="button">Cancelar</button>
+        <button id="ltxOk" type="button" class="primary">Insertar</button>
+      </div>
+    </div>
+  </div>
+  <div id="prefsDlg" class="modal" hidden>
+    <div class="dlg small" role="dialog" aria-label="Preferencias">
+      <div class="dlgHead"><b>Preferencias</b><span>Intro acepta · Esc cancela</span></div>
+      <label class="prefRow">Tema <select id="prefTheme"><option value="classic">Clásico (oscuro)</option><option value="neon">Neon (synthwave, con brillo)</option></select></label>
+      <label class="prefRow">Efectos (brillos y sombras difuminadas) <select id="prefFx"><option value="auto">Automático (reducidos si el sistema pide menos movimiento o transparencias)</option><option value="full">Siempre completos</option><option value="reduced">Reducidos (menos uso de GPU)</option></select></label>
+      <label class="prefRow"><input type="checkbox" id="prefFinger" /> Los dedos dibujan (pantallas táctiles). Desactivado, un dedo solo desplaza y se ignora la palma.</label>
+      <label class="prefRow"><input type="checkbox" id="prefOver" /> Guardar sobre el archivo abierto sin preguntar. Desactivado, la primera vez se pregunta dónde guardar.</label>
+      <label class="prefRow">Autoguardado cada <input type="number" id="prefAuto" min="0" max="120" step="1" /> minutos (0 = desactivado). Se escribe una copia de recuperación aparte: nunca toca tu archivo. Se abre con Archivo → Abrir copia de recuperación.</label>
+      <div class="dlgOpts"><span class="grow"></span><button id="prefCancel" type="button">Cancelar</button><button id="prefOk" type="button" class="primary">Aceptar</button></div>
+    </div>
+  </div>
+  <div id="toolbox" hidden role="dialog" aria-label="Cuadro de herramientas"></div>
+  <div id="tabletDlg" class="modal" hidden>
+    <div class="dlg" role="dialog" aria-label="Lápiz y tableta">
+      <div class="dlgHead"><b>Lápiz y tableta</b><span>Esc cierra</span></div>
+      <div id="tabletBody"></div>
+      <div class="dlgOpts"><span class="grow"></span><button id="tabletClose" type="button" class="primary">Cerrar</button></div>
+    </div>
+  </div>
+  <div id="penDlg" class="modal" hidden>
+    <div class="dlg small" role="dialog" aria-label="Diagnóstico del lápiz">
+      <div class="dlgHead"><b>Diagnóstico del lápiz</b><span>Esc cierra</span></div>
+      <canvas id="penCanvas"></canvas>
+      <pre id="penReport"></pre>
+      <div class="dlgOpts"><span class="grow"></span><button id="penCopy" type="button">Copiar informe</button><button id="penClose" type="button" class="primary">Cerrar</button></div>
+    </div>
+  </div>
+  <button id="presentChip" type="button" title="Salir del modo presentación (Esc)">Modo presentación · Esc para salir ✕</button>
+  <script src="renderer.js"></script>
+</body>
+</html>

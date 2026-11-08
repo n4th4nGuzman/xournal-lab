@@ -1,0 +1,22 @@
+# One formula per line: the tricky cases of the layout engine (xl_render_formulas OUT.png tools/formulas_sheet.txt)
+\frac{a}{b} + \frac{1}{1+\frac{1}{x}} = \dfrac{x^2+1}{\sqrt{x^2-1}}
+x^{2}_{i} + a_{n}^{2} + e^{-x^2/2} + f'(x) + f''(x)^{2}
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2} \qquad \prod_{k=1}^{n} k = n!
+\int_{0}^{1} x^2 \,dx = \frac13 \qquad \oint_{C} \vec{F}\cdot d\vec{r} \qquad \int_{-\infty}^{\infty} e^{-x^2}\,dx=\sqrt{\pi}
+\iint_{D} f\,dA \qquad \iiint_{E} f\,dV \qquad \lim_{x\to 0}\frac{\sin x}{x}=1
+\sqrt{x} + \sqrt[3]{x^2+1} + \sqrt{\frac{a}{b}} + \sqrt[n]{1+\sqrt{2}}
+\left( \frac{a}{b} \right) \left[ \frac{x^2}{\sqrt{y}} \right] \left\{ \frac{\frac{1}{2}}{3} \right\} \left| x \right| \left\| \vec{v} \right\|
+\begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{vmatrix} a & b \\ c & d \end{vmatrix}
+f(x)=\begin{cases} x & \text{si } x\ge 0 \\ -x & \text{si } x<0 \end{cases}
+\begin{aligned} a &= b + c \\ &= d + e \\ &= f \end{aligned}
+\vec{F}=m\vec{a}\quad \hat{x}\ \bar{x}\ \dot{x}\ \ddot{x}\ \tilde{x}\ \overline{AB}\ \underline{xyz}\ \widehat{ABC}
+\alpha\beta\gamma\delta\varepsilon\theta\lambda\mu\pi\sigma\phi\omega\ \Gamma\Delta\Theta\Lambda\Xi\Pi\Sigma\Phi\Psi\Omega
+\leq \geq \neq \approx \infty \partial \nabla \cdot \times \in \subset \cup \cap \to \Rightarrow \iff \forall \exists
+\mathbb{R}^{n}\ \mathbb{N}\ \mathbb{Z}\ \mathbb{Q}\ \mathbb{C}\ \mathcal{L}\ \mathcal{P}(A)\ \mathfrak{g}\ \mathbf{x}\ \mathrm{d}x\ \mathsf{A}\ \mathtt{code}
+\nabla\times\vec{E}=-\frac{\partial\vec{B}}{\partial t} \qquad \nabla\cdot\vec{F}=\frac{\partial P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}
+\oint_{C} P\,dx+Q\,dy=\iint_{D}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)dA
+\nabla\times\vec{F}=\begin{vmatrix}\hat\imath&\hat\jmath&\hat k\\\partial_x&\partial_y&\partial_z\\P&Q&R\end{vmatrix}
+\overbrace{a+b+c}^{3} \quad \underbrace{x+y}_{2} \quad \overset{a}{=} \quad \xrightarrow{f} \quad \boxed{E=mc^{2}} \quad \cancel{x} \quad {\color{red} x^2}
+i\hbar\frac{\partial\psi}{\partial t}=\hat{H}\psi \qquad \langle\phi|\psi\rangle \qquad \binom{n}{k}=\frac{n!}{k!(n-k)!}
+\operatorname{sgn}(x)\ \sin\theta\ \log_{2} n\ \max_{x\in A} f(x)\ a \bmod n\ x \pmod{n}\ \det A\ \gcd(a,b)
+\left(\begin{array}{cc|c}a&b&e\\c&d&f\end{array}\right) \qquad \begin{array}{c|c}a&b\\\hline c&d\end{array}

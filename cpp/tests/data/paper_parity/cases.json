@@ -1,0 +1,137 @@
+[
+{
+"name": "plain_w",
+"value": "plain",
+"color": "#ffffff"
+},
+{
+"name": "plain_d",
+"value": "plain",
+"color": "#120a26"
+},
+{
+"name": "lined_w",
+"value": "lined",
+"color": "#ffffff"
+},
+{
+"name": "lined_d",
+"value": "lined",
+"color": "#120a26"
+},
+{
+"name": "ruled_w",
+"value": "ruled",
+"color": "#ffffff"
+},
+{
+"name": "graph_w",
+"value": "graph",
+"color": "#ffffff"
+},
+{
+"name": "graph_d",
+"value": "graph",
+"color": "#120a26"
+},
+{
+"name": "dotted_w",
+"value": "dotted",
+"color": "#ffffff"
+},
+{
+"name": "dotted_d",
+"value": "dotted",
+"color": "#120a26"
+},
+{
+"name": "mm",
+"value": "x:mm",
+"color": "#ffffff"
+},
+{
+"name": "mm_d",
+"value": "x:mm",
+"color": "#120a26"
+},
+{
+"name": "cart_quad-4_unit-1_sub-off_labels-on",
+"value": "x:cart;quad=4;unit=1;sub=off;labels=on",
+"color": "#ffffff"
+},
+{
+"name": "cart_quad-4_unit-1_sub-off_labels-on_d",
+"value": "x:cart;quad=4;unit=1;sub=off;labels=on",
+"color": "#120a26"
+},
+{
+"name": "cart_quad-4_unit-2_sub-off_labels-off",
+"value": "x:cart;quad=4;unit=2;sub=off;labels=off",
+"color": "#ffffff"
+},
+{
+"name": "cart_quad-1_unit-0.5_sub-on_labels-on",
+"value": "x:cart;quad=1;unit=0.5;sub=on;labels=on",
+"color": "#ffffff"
+},
+{
+"name": "trig_grid-6",
+"value": "x:trig;grid=6",
+"color": "#ffffff"
+},
+{
+"name": "trig_grid-6_d",
+"value": "x:trig;grid=6",
+"color": "#120a26"
+},
+{
+"name": "trig_grid-4",
+"value": "x:trig;grid=4",
+"color": "#ffffff"
+},
+{
+"name": "polar_step-15_ring-1",
+"value": "x:polar;step=15;ring=1",
+"color": "#ffffff"
+},
+{
+"name": "polar_step-15_ring-1_d",
+"value": "x:polar;step=15;ring=1",
+"color": "#120a26"
+},
+{
+"name": "polar_step-10_ring-0.5",
+"value": "x:polar;step=10;ring=0.5",
+"color": "#ffffff"
+},
+{
+"name": "iso_look-lines_size-1",
+"value": "x:iso;look=lines;size=1",
+"color": "#ffffff"
+},
+{
+"name": "iso_look-lines_size-1_d",
+"value": "x:iso;look=lines;size=1",
+"color": "#120a26"
+},
+{
+"name": "iso_look-lines_size-2",
+"value": "x:iso;look=lines;size=2",
+"color": "#ffffff"
+},
+{
+"name": "iso_look-dots_size-0.5",
+"value": "x:iso;look=dots;size=0.5",
+"color": "#ffffff"
+},
+{
+"name": "cornell",
+"value": "x:cornell",
+"color": "#ffffff"
+},
+{
+"name": "cornell_d",
+"value": "x:cornell",
+"color": "#120a26"
+}
+]

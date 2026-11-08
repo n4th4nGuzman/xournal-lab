@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build*/
+*.log
+*.obj
+*.exe
+*.dll
+*.a
+.cache/
+shots/
+*.zip
+# personal documents and local captures
+samples/

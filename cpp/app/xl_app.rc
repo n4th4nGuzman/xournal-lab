@@ -1,0 +1,2 @@
+// The icon of xl_app.exe (Explorer, taskbar, installer). Windows resource script; see tools/make_icon.py.
+IDI_ICON1 ICON "icon/xournal-lab.ico"

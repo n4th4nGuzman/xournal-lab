@@ -1,0 +1,6 @@
+Xournal Lab - versión alpha
+
+Esta es una versión de prueba: todavía le falta trabajo y puede tener errores.
+Haz copias de tus documentos importantes antes de editarlos con ella.
+
+Comparte las preferencias con la versión Electron (prefs.json en %APPDATA%\xournal-electron).

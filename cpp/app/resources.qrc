@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="icon/xournal-lab-256.png">icon/xournal-lab-256.png</file>
+  </qresource>
+</RCC>
