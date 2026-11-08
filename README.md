@@ -30,7 +30,7 @@ Los elementos propios (planos, figuras, fórmulas, papeles especiales) se guarda
 - Páginas y capas con miniaturas, vista continua o página a página, dos páginas enfrentadas y búsqueda en textos y fórmulas.
 - Zoom de 25 % a 2000 %, y ajuste al ancho que sigue el tamaño de la ventana.
 - Lápiz y tableta en Windows: botones del lápiz asignables, con modo de mantener pulsado; sin la onda de Windows al tocar; sin el panel de escritura a mano sobre los cuadros de texto; hoja de prueba que muestra los eventos que llegan del controlador.
-- Guardado: no sobrescribe en silencio el archivo de otro documento; el autoguardado escribe una copia de recuperación aparte.
+- Guardado: al guardar un documento abierto desde un archivo, pregunta dónde guardarlo en vez de reemplazar ese archivo. El autoguardado escribe una copia de recuperación aparte.
 
 ## Uso
 

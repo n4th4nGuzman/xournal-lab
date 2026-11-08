@@ -94,7 +94,7 @@ Cada cambio se puede deshacer. El espaciado y la opacidad se guardan en el fondo
 
 ## 8. Guardar y recuperar
 
-- La primera vez que guardas, la aplicación pregunta dónde (nombre sugerido `<archivo>-lab.xopp`). No sobrescribe en silencio el archivo de otro documento: solo reutiliza una ruta que ella misma guardó en esta sesión.
+- Al guardar un documento que abriste desde un archivo, la aplicación pregunta dónde guardarlo (nombre sugerido `<archivo>-lab.xopp`) y no reemplaza ese archivo. Solo guarda directo sobre un archivo que ella misma guardó en esta sesión.
 - *Guardar copia* no cambia la ruta ni el estado de «sin guardar».
 - Con cambios pendientes, al cerrar pide confirmación.
 - **Autoguardado** (Preferencias, desactivado por defecto): escribe una copia de recuperación aparte, no sobre el archivo original, y solo si hay cambios sin guardar. Se abre con *Archivo → Abrir copia de recuperación*.
