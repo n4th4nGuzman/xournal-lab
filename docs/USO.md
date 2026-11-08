@@ -1,6 +1,6 @@
 # Guía de uso de Xournal Lab
 
-Guía de la aplicación C++ (`cpp/`). La versión Electron (`app/`) se comporta igual en lo básico; la tabla de herramientas de abajo vale para las dos. Esta es una **alpha**: si algo de esta guía no coincide con lo que ves, la guía puede estar atrasada. Dímelo abriendo un *issue*.
+Guía de la aplicación C++ (`cpp/`). La versión Electron (`app/`) se comporta igual en lo básico; la tabla de herramientas de abajo vale para las dos. Versión 0.1.0-alpha. Las diferencias entre esta guía y la aplicación se pueden reportar en un *issue*.
 
 ## 1. Abrir la aplicación
 
@@ -27,7 +27,7 @@ Dónde guarda sus datos:
 - **Barras laterales**: miniaturas de páginas y capas.
 - **Menús**: Archivo, Editar, Ver, Navegación, Diario, Herramientas, Ayuda. Los atajos aparecen en cada entrada.
 
-### Los grosores están siempre disponibles
+### Grosores
 
 La fila de estilo muestra los grosores de la herramienta activa. Con las herramientas que no tienen tamaño propio (selección, mano, relleno, fórmulas, láser), muestra los **grosores del lápiz**: así puedes elegir uno sin volver al lápiz, y vale también para plano, 3D, figuras, recta numérica y Venn. La goma tiene su propio radio y el texto su propio tamaño.
 
@@ -94,10 +94,10 @@ Cada cambio se puede deshacer. El espaciado y la opacidad se guardan en el fondo
 
 ## 8. Guardar y recuperar
 
-- La primera vez que guardas, la aplicación pregunta dónde (nombre sugerido `<archivo>-lab.xopp`). **Nunca sobrescribe el archivo de otro en silencio**; solo reutiliza una ruta que ella misma guardó en esta sesión.
+- La primera vez que guardas, la aplicación pregunta dónde (nombre sugerido `<archivo>-lab.xopp`). No sobrescribe en silencio el archivo de otro documento: solo reutiliza una ruta que ella misma guardó en esta sesión.
 - *Guardar copia* no cambia la ruta ni el estado de «sin guardar».
 - Con cambios pendientes, al cerrar pide confirmación.
-- **Autoguardado** (Preferencias, desactivado por defecto): escribe una copia de recuperación aparte, nunca sobre tu archivo, y solo si hay cambios sin guardar. Se abre con *Archivo → Abrir copia de recuperación*.
+- **Autoguardado** (Preferencias, desactivado por defecto): escribe una copia de recuperación aparte, no sobre el archivo original, y solo si hay cambios sin guardar. Se abre con *Archivo → Abrir copia de recuperación*.
 
 ## 9. Lápiz y tableta (Windows)
 
@@ -106,12 +106,12 @@ Los ajustes están en *Herramientas → Lápiz y tableta…* y en *Preferencias*
 - **Hoja de prueba:** dibuja con la punta elegida y muestra en vivo el dispositivo, la presión (cruda y con la curva), la inclinación, los botones y una traza de los eventos sin procesar. Si un botón no responde, copia esa traza al abrir un *issue*.
 - **Curva de presión y zona muerta:** ajustan cuánto grosor da cada nivel de presión. La presión que llega es la de Windows Ink (de 0 a 1024 niveles), aunque el controlador de la tableta vea más niveles internamente.
 - **Botones del lápiz:** en *Atajos de teclado*, «Asignar tecla…» captura el botón que pulses. Un botón asignado a una herramienta funciona como en Xournal++: **la herramienta está activa mientras mantienes el botón, y al soltarlo vuelves a la anterior**.
-- **Sin molestias de Windows:** la aplicación pide a Windows que no dibuje la onda al tocar y que no abra el panel de escritura a mano sobre los cuadros de texto. Solo afecta a esta aplicación y no cambia ninguna configuración del sistema.
+- **Efectos de Windows:** la aplicación pide a Windows que no dibuje la onda al tocar y que no abra el panel de escritura a mano sobre los cuadros de texto. Afecta solo a esta aplicación y no cambia ninguna configuración del sistema.
 - **Rueda del ratón en formularios:** no cambia un selector hasta que lo has seleccionado con un clic.
 
 ### Consejos para tabletas XP-Pen
 
-Probado con una XP-Pen Deco Pro MW (Gen 2) y lápiz X3 Pro en Windows 10, sin pantalla táctil. No hay garantía con otros modelos.
+Probado con una XP-Pen Deco Pro MW (Gen 2) y lápiz X3 Pro en Windows 10, sin pantalla táctil. No se ha probado con otros modelos.
 
 - Deja **Windows Ink activado** en el controlador: da presión e inclinación y es lo que usa Qt 6. El modo de ratón pierde presión y botones en el aire.
 - El controlador envía los botones laterales como botones del ratón (derecho y central) además de como botones de lápiz; la aplicación lo tiene en cuenta.
@@ -128,6 +128,6 @@ Probado con una XP-Pen Deco Pro MW (Gen 2) y lápiz X3 Pro en Windows 10, sin pa
 |---|---|
 | El lápiz no dibuja o dibuja sin presión | Abre la hoja de prueba. Si el dispositivo aparece como ratón, activa Windows Ink en el controlador. |
 | Un botón del lápiz no hace nada | Mira la traza de eventos sin procesar en la hoja de prueba y revisa que no esté asignado en dos sitios (Preferencias y atajos). |
-| La herramienta mano o un botón se comporta raro con otro modelo de lápiz | Se ajustó con un solo modelo. Adjunta la traza de eventos de la hoja de prueba en un *issue*. |
+| La herramienta mano o un botón se comporta de forma distinta con otro modelo de lápiz | Se ajustó con un solo modelo. Adjunta la traza de eventos de la hoja de prueba en un *issue*. |
 | «El programa no inicia en otra PC» | Usa el paquete portátil o el instalador, que incluyen las bibliotecas de Qt; el ejecutable suelto de `build\` necesita MSYS2 en el PATH. |
 | SmartScreen avisa al instalar | El instalador no está firmado. «Más información → Ejecutar de todas formas». |

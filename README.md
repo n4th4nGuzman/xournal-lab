@@ -1,67 +1,65 @@
 # Xournal Lab
 
-**Un cuaderno digital para escribir a mano en Windows, hecho para trabajar con lápiz y tableta, que lee y guarda archivos `.xopp` de [Xournal++](https://github.com/xournalpp/xournalpp).**
+Aplicación para escribir a mano en Windows con lápiz y tableta. Abre y guarda archivos `.xopp` de [Xournal++](https://github.com/xournalpp/xournalpp).
 
-> **Estado: alpha (0.1.0-alpha).** Funciona y se usa a diario, pero le falta trabajo y puede tener errores. Haz copia de tus documentos importantes antes de editarlos con esta versión.
+Versión: 0.1.0-alpha.
 
-*English, in short:* Xournal Lab is an independent handwriting-notebook app for Windows that reads and writes Xournal++ `.xopp` files. It has two implementations of the same program: a C++/Qt 6 application (the main one, built for a fluid pen and tablet input) and the Electron + TypeScript application it was ported from. It is an alpha. This repository is a GitHub fork of Xournal++ only in the sense of a family link: the code here is a separate code base, written from observed behaviour and the file format, not copied from Xournal++. Licensed under GPL-2.0-or-later, like Xournal++.
+*English summary:* Xournal Lab is a handwriting notebook application for Windows that reads and writes Xournal++ `.xopp` files. The repository has two implementations of the same program: a C++/Qt 6 application and the Electron + TypeScript application it was ported from. Version 0.1.0-alpha. The repository is a GitHub fork of Xournal++ for linking purposes; its code is a separate code base. License: GPL-2.0-or-later.
 
-## Qué es
+## Descripción
 
-Xournal Lab nació como un experimento sobre Xournal++ v1.3.8: ¿cuánto se entiende de un programa leyendo su código y cuánto haciendo ingeniería inversa de su binario? De ahí salió una versión propia que abre, edita y guarda `.xopp`, y después un **port a C++ con Qt 6** pensado para que el lápiz sea fluido y la página no se ponga lenta aunque tenga miles de trazos.
+Xournal Lab comenzó como un experimento sobre Xournal++ v1.3.8: leer su código fuente frente a hacer ingeniería inversa de su binario. Del experimento salió una versión que abre, edita y guarda `.xopp`, y después un port a C++ con Qt 6.
 
-Hay dos aplicaciones en este repositorio:
+El repositorio contiene dos aplicaciones:
 
-| Carpeta | Qué contiene | Estado |
-|---|---|---|
-| [`cpp/`](cpp) | **Aplicación principal** en C++20 y Qt 6 (Widgets, Qt6Pdf). Interfaz en español, tema neón y clásico. | La que se usa y se desarrolla. |
-| [`app/`](app) | Versión original en Electron + TypeScript. | Es la referencia de comportamiento del port; ya no es el foco. |
+| Carpeta | Contenido |
+|---|---|
+| [`cpp/`](cpp) | Aplicación en C++20 y Qt 6 (Widgets, Qt6Pdf). Interfaz en español, temas neón y clásico. |
+| [`app/`](app) | Versión en Electron + TypeScript. Es la referencia de comportamiento del port C++. |
 
-Los documentos son intercambiables con Xournal++: las cosas propias (planos, figuras, fórmulas, papeles especiales) se guardan como trazos y textos normales con atributos extra, así que el archivo sigue siendo un `.xopp` válido.
+Los elementos propios (planos, figuras, fórmulas, papeles especiales) se guardan como trazos y textos con atributos adicionales, de modo que el archivo sigue siendo un `.xopp` válido.
 
-## Qué hace
+## Funciones
 
-- **Escribir a mano** con lápiz, resaltador y gomas (trazo completo o solo la zona tocada), sensible a la presión, con curva de presión y zona muerta configurables.
-- **Seleccionar** por rectángulo, lazo u objeto; mover, redimensionar, rotar y espejar con transportador; copiar, pegar, duplicar y cambiar el orden de apilado.
-- **Texto, imágenes, formas** (con reconocimiento automático de formas) y **fórmulas LaTeX** con vista previa en vivo, sin instalar LaTeX.
-- **Objetos matemáticos**: plano cartesiano, espacio 3D, figuras, recta numérica, diagramas de Venn y relleno de regiones.
-- **Papeles**: liso, rayado, cuadriculado, punteado, isométricos y especiales (milimetrado, plano cartesiano, trigonométrico, polar, logarítmico, Cornell). Se puede ajustar el **espaciado** y la **opacidad** de las líneas.
-- **PDF**: usar un PDF como fondo, anotarlo, exportar a PDF o PNG e imprimir.
-- **Páginas y capas** con miniaturas, vista continua o página a página, dos páginas enfrentadas y búsqueda en textos y fórmulas.
-- **Zoom** de 25 % a 2000 %, con «ajustar al ancho» que sigue el tamaño de la ventana.
-- **Lápiz y tableta en Windows**: botones del lápiz asignables (con «mantener para usar», como en Xournal++), sin onda de Windows al tocar, sin panel de escritura a mano sobre los cuadros de texto, y una hoja de prueba que muestra lo que llega del controlador.
-- **Seguridad al guardar**: nunca sobrescribe el archivo de otro en silencio, el autoguardado escribe una copia de recuperación aparte.
+- Lápiz, resaltador y gomas (trazo completo o solo la zona tocada), con presión, curva de presión y zona muerta configurables. Puntas: bolígrafo, tinta, pluma y pincel.
+- Selección por rectángulo, lazo u objeto; mover, redimensionar, rotar y espejar con transportador; copiar, pegar, duplicar y cambiar el orden de apilado.
+- Texto, imágenes, formas (con reconocimiento automático de formas) y fórmulas LaTeX con vista previa, sin instalar LaTeX.
+- Objetos matemáticos: plano cartesiano, espacio 3D, figuras, recta numérica, diagramas de Venn y relleno de regiones.
+- Papeles: liso, rayado, cuadriculado, punteado, isométricos y especiales (milimetrado, plano cartesiano, trigonométrico, polar, logarítmico, Cornell), con espaciado y opacidad de las líneas ajustables.
+- PDF como fondo, anotación, exportación a PDF o PNG e impresión.
+- Páginas y capas con miniaturas, vista continua o página a página, dos páginas enfrentadas y búsqueda en textos y fórmulas.
+- Zoom de 25 % a 2000 %, y ajuste al ancho que sigue el tamaño de la ventana.
+- Lápiz y tableta en Windows: botones del lápiz asignables, con modo de mantener pulsado; sin la onda de Windows al tocar; sin el panel de escritura a mano sobre los cuadros de texto; hoja de prueba que muestra los eventos que llegan del controlador.
+- Guardado: no sobrescribe en silencio el archivo de otro documento; el autoguardado escribe una copia de recuperación aparte.
 
-## Cómo usarlo
+## Uso
 
-La guía completa está en **[docs/USO.md](docs/USO.md)**. Para compilarlo: **[docs/COMPILAR.md](docs/COMPILAR.md)**.
+Guía de uso: [docs/USO.md](docs/USO.md). Compilación y empaquetado: [docs/COMPILAR.md](docs/COMPILAR.md).
 
-En resumen, en Windows 10/11 de 64 bits:
+En Windows 10/11 de 64 bits:
 
-1. Compila la aplicación C++ (MSYS2 UCRT64, Qt 6, CMake, Ninja) o genera el paquete portátil o el instalador con `cpp\package.bat` y `cpp\installer.bat`.
-2. Abre `xl_app.exe`, o arrastra un `.xopp` encima.
+1. Compilar la aplicación C++ (MSYS2 UCRT64, Qt 6, CMake, Ninja), o generar el paquete portátil o el instalador con `cpp\package.bat` y `cpp\installer.bat`.
+2. Abrir `xl_app.exe`, o arrastrar un `.xopp` sobre él.
 
-## Qué está verificado y qué no
+## Estado y pruebas
 
-Esto es una alpha y lo decimos sin adornos:
-
-- La aplicación C++ tiene 25 pruebas unitarias (`ctest`) y una prueba de interfaz en pantalla virtual (`xl_app --selftest`, cientos de comprobaciones con eventos sintéticos de Qt). Pasan en el equipo de desarrollo.
-- **Nada de lo que depende de un lápiz físico se puede probar con eventos sintéticos.** El comportamiento del lápiz XP-Pen Deco Pro / X3 Pro en Windows 10 se ajustó con registros reales, pero se ha probado con un solo modelo y un solo equipo. Otros lápices o controladores pueden comportarse distinto. Las notas por área están en [`cpp/PARIDAD/`](cpp/PARIDAD) (por ejemplo [`winpen.md`](cpp/PARIDAD/winpen.md)), con la lista de lo que falta por probar.
-- Que **Xournal++ oficial abra** todo lo que genera esta aplicación (fórmulas, objetos matemáticos) no se ha comprobado con la aplicación oficial.
-- Algunas pruebas usan documentos personales que **no** se publican, así que esas no se pueden repetir desde este repositorio.
-- El instalador de Windows no está firmado: SmartScreen puede mostrar un aviso la primera vez.
-- Faltan funciones de Xournal++ (plugins en Lua, plantillas de página, exportar a SVG, regla y escuadra dibujadas en la página, entre otras). La tabla de paridad completa está en [`cpp/PARIDAD/xpp_features.md`](cpp/PARIDAD/xpp_features.md).
+- Versión alpha.
+- Pruebas: 25 pruebas unitarias (`ctest`) y comprobaciones de interfaz sin ventana (`xl_app --selftest`) con eventos sintéticos de Qt.
+- Comportamiento con lápiz: ajustado y probado con una XP-Pen Deco Pro MW (Gen 2) y lápiz X3 Pro en Windows 10. No se ha probado con otros lápices ni controladores. Las notas por área están en [`cpp/PARIDAD/`](cpp/PARIDAD) (por ejemplo [`winpen.md`](cpp/PARIDAD/winpen.md)).
+- No se ha comprobado que Xournal++ abra los archivos con fórmulas ni objetos matemáticos generados por esta aplicación.
+- Algunas pruebas usan documentos que no están en el repositorio.
+- El instalador de Windows no está firmado; SmartScreen puede mostrar un aviso la primera vez.
+- Funciones de Xournal++ sin implementar: plugins en Lua, plantillas de página, exportación a SVG, regla y escuadra dibujadas en la página, entre otras. La tabla de paridad está en [`cpp/PARIDAD/xpp_features.md`](cpp/PARIDAD/xpp_features.md).
 
 ## Relación con Xournal++
 
-Este proyecto es un **fork en GitHub de [xournalpp/xournalpp](https://github.com/xournalpp/xournalpp)** a efectos de enlace y de reconocimiento, pero **el código que contiene es otra base de código**: la rama principal de este repositorio no comparte historial con Xournal++.
+Este repositorio es un fork de [xournalpp/xournalpp](https://github.com/xournalpp/xournalpp) en GitHub. El código de la rama principal es una base de código distinta y no comparte historial con Xournal++; la rama `master` conserva el historial original.
 
-- Xournal++ es el programa de referencia. Aquí se replica **qué hace, dónde está y cómo se comporta**, a partir del manual, del formato `.xopp` y de la observación del programa. La documentación de paridad lo dice así en [`cpp/PARIDAD/xpp_features.md`](cpp/PARIDAD/xpp_features.md): *se replica qué hace, no se copia su código.* Aun así, durante el desarrollo se leyó el código fuente público de Xournal++ v1.3.8, y no podemos garantizar que ninguna parte sea derivada. Por eso este proyecto usa la **misma licencia que Xournal++**.
-- No está afiliado ni respaldado por el equipo de Xournal++. Si buscas el programa maduro y completo, usa [Xournal++](https://xournalpp.github.io).
-- El historial original de Xournal++ sigue disponible en la rama `master` de este fork, sin cambios.
+- Xournal++ es el programa de referencia. Esta aplicación replica qué hace, dónde está y cómo se comporta, a partir del manual, del formato `.xopp` y de la observación del programa; no copia su código, según consta en [`cpp/PARIDAD/xpp_features.md`](cpp/PARIDAD/xpp_features.md). Durante el desarrollo se leyó el código fuente público de Xournal++ v1.3.8, por lo que no se descarta que alguna parte sea derivada. Por eso el proyecto usa la misma licencia que Xournal++.
+- No está afiliado al equipo de Xournal++.
 
 ## Licencia
 
-**GPL-2.0-or-later**, igual que Xournal++. El texto está en [LICENSE](LICENSE) (GNU GPL versión 2); se permite usarlo bajo esa versión o cualquier posterior.
+GPL-2.0-or-later, igual que Xournal++. El texto está en [LICENSE](LICENSE) (GNU GPL versión 2); se puede usar bajo esa versión o cualquier posterior.
 
-Las bibliotecas que se enlazan o incluyen conservan su propia licencia: Qt 6 (LGPL v3, enlazada dinámicamente), pdfium dentro de Qt6Pdf, y en la versión Electron KaTeX y pdf.js. Quien redistribuya los binarios debe cumplir con ellas.
+Las bibliotecas enlazadas o incluidas conservan su licencia: Qt 6 (LGPL v3, enlazada dinámicamente), pdfium dentro de Qt6Pdf, y KaTeX y pdf.js en la versión Electron. Quien redistribuya los binarios debe cumplir con ellas.
